@@ -34,7 +34,6 @@ def validate_file(cwdir, prompt):
             value = os.path.join(cwdir, input(prompt))
             _ = open(value)
         except Exception: #FileExistsError:
-            # noinspection PyUnboundLocalVariable
             print("File not found: ", value)
             continue
         else:
@@ -104,23 +103,11 @@ if __name__ == '__main__':
 
         CTA2 = []
         ret2, im2 = cv2.imreadmulti(mats=CTA2, filename=rgb_file, flags=1)#cv2.IMREAD_ANYCOLOR)
-        #cv2.imshow('im2', im2)  # mat is not a numpy array, neither a scalar
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
         im_original = tiff.imread(original_file) #(446, 512,512)
-        #print(im2[0].shape)   #(512,512) im2 has 446 (512,512)
-        #print('.............')
-        #print([im_original[0]<=0])    #im_original (446, 512, 512), im_original[0] (512,512)
-        #print('.............')
-        #print(results[0])
+
         sresults = utils.superimpose_color(im2, im_original, results, min_value, max_value)
-        #ret2, im2 = cv2.imreadmulti(mats=CTA2, filename=rgb_file, flags=1)#cv2.IMREAD_ANYCOLOR)
         change = np.array(sresults)
         change = change+1024         #test3
-        #change.tiff.write_file(output_rgb, compression='none')#test4
-        #imageio.mimwrite(output_rgb, change)   #test3
-        #t=np.zeros((change.shape))
-        #tt = np.mat(t)
-        #ret3, test4 = cv2.imreadmulti(mats=tt, filename=change, flags=0)
+
         
         imageio.mimwrite(output_rgb, change)
