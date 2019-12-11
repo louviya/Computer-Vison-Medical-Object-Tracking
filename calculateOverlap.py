@@ -112,10 +112,6 @@ def calculateOverlap(binary_image, overlap_type):
         
         c.append(len(contour_list[i])) #number of contours
         
-        #area = cv2.contourArea(contours[0])
-        #nump = np.count_nonzero(contours[0])
-        #print(len(contours))
-        #print(area)
         
         # Draw current contours array
         cv2.drawContours(mask, contours, -1, (255, 255, 255), -1)
@@ -124,7 +120,5 @@ def calculateOverlap(binary_image, overlap_type):
 
         
 
-    #numofcons = pd.DataFrame(data=c)
-    #numofcons.to_csv('numofcons.csv', encoding ='gbk')
 
     return mask_final, contour_list
