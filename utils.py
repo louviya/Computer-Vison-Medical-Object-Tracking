@@ -237,36 +237,16 @@ def superimpose_color(rgb_image, original_image, mask, min_value, max_value):
 
         # Black out regions of masks in frame
         rgb_image[i] = cv2.bitwise_and(rgb_image[i], rgb_image[i], mask=totalThresh_inv1)
-        #cv2.imshow('rgb',rgb_image[i])
-        #cv2.waitKey(0)
-        #print('rgb_image[i].shape',rgb_image[i].shape)  #(512,512,3)
-        # Get regions of interest of colored arrays
         redImage_mask = cv2.bitwise_and(redImage, redImage, mask=calcThresh1)
-        #cv2.imshow('red',redImage_mask)
-        #cv2.waitKey(0)
-        blueImage_mask = cv2.bitwise_and(blueImage, blueImage, mask=vesselThresh1)
-        #print(vesselThresh1.shape)
-        #print(blueImage.shape)
-        # Add results together
-        rgb_image[i] = rgb_image[i]+ redImage_mask#+1024  test2  #cv2.add(rgb_image[i], redImage_mask)
-        #print('redImage_mask', redImage_mask.shape)  #(512,512)
-        rgb_image[i] = rgb_image[i]+ blueImage_mask#+1024 #cv2.add(rgb_image[i], blueImage_mask)
         
-        #r,g,b,a, = cv2.split(rgb_image[i])
-        #new = cv2.merge("RGB",(r,g,b))
+        blueImage_mask = cv2.bitwise_and(blueImage, blueImage, mask=vesselThresh1)
+        
+        rgb_image[i] = rgb_image[i]+ redImage_mask
+        rgb_image[i] = rgb_image[i]+ blueImage_mask
+     
         gImage_mask = cv2.bitwise_and(gImage, gImage, mask=wallThresh1)
         rgb_image[i] = rgb_image[i]+ gImage_mask
-        #rgb[i] = cv2.cvtColor(rgb_image[i],cv2.COLOR_GRAY2BGR)
-    #CTA3 = []
-    #ret3, im3 = cv2.imreadmulti(filename=rgb_image, mats=CTA3)
-    #for j in range(0, 446):       
-        #src2 = rgb_image[j]        #######
-        #cv2.cvtColor(src2,rgb_image[j], cv2.COLOR_BGR2GREAY) 
-        #rgb_image[j] = cv2.cvtColor(src2, cv2.COLOR_BGR2HSI) 
-    #print(rgb_image.shape)
-    #np.array()
-    
-    #rgb_image = rgb_image+1024
+        
     return rgb_image
 
 
